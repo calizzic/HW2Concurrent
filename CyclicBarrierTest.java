@@ -27,7 +27,7 @@ public class CyclicBarrierTest implements Runnable {
 					barrierBroken = true;
 				waitCount = Integer.max(waitCount, round);
 			}
-			// System.out.println("Thread " + Thread.currentThread().getId() + " is waiting round:" + round);
+			//System.out.println("Thread " + Thread.currentThread().getId() + " is waiting round:" + round);
 			try {
 				index = barrier.await();
 			} catch (InterruptedException e) {
@@ -38,7 +38,7 @@ public class CyclicBarrierTest implements Runnable {
 					barrierBroken = true;
 				leaveCount = Integer.max(leaveCount, round);
 			}
-			// System.out.println("Thread " + Thread.currentThread().getId() + " is leaving round:" + round);
+			//System.out.println("Thread " + Thread.currentThread().getId() + " is leaving round:" + round);
 		}
 	}
 

@@ -1,15 +1,18 @@
-// EID 1
+// CSC3322
 // EID 2
 
 /* Use only Java monitors to accomplish the required synchronization */
 public class MonitorCyclicBarrier implements CyclicBarrier {
 
     private int parties;
+    private int current;
+    private boolean active;
     // TODO Add other useful variables
 
     public MonitorCyclicBarrier(int parties) {
         this.parties = parties;
-        // TODO Add any other initialization statements
+        this.current = 0;
+        this.active = true;
     }
 
     /*
@@ -23,9 +26,21 @@ public class MonitorCyclicBarrier implements CyclicBarrier {
      * indicates the first to arrive and (parties-1) indicates
      * the last to arrive.
      */
-    public int await() throws InterruptedException {
+    public synchronized int await() throws InterruptedException {
         // TODO Implement this function
-        return -1;
+    	int place = this.current;
+    	if(!this.active) {
+    		return -1;
+    	}
+    	
+    	this.current +=1;
+    	if(this.current<this.parties && this.active) {
+    		wait();
+    	}else {
+    		notifyAll();
+    		this.current = 0;
+    	}
+        return place;
     }
 
     /*
@@ -33,16 +48,21 @@ public class MonitorCyclicBarrier implements CyclicBarrier {
      * the active state, no change is made.
      * If the barrier is in the inactive state, it is activated and
      * the state of the barrier is reset to its initial value.
+     * 
      */
-    public void activate() throws InterruptedException {
-        // TODO Implement this function
+    public synchronized void activate() throws InterruptedException {
+        if(!this.active) {
+        	this.active = true;
+            this.current = 0;
+        }
     }
 
     /*
      * This method deactivates the cyclic barrier.
      * It also releases any waiting threads
      */
-    public void deactivate() throws InterruptedException {
-        // TODO Implement this function
+    public synchronized void deactivate() throws InterruptedException {
+        this.active = false;
+        notifyAll();
     }
 }

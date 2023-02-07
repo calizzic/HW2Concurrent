@@ -13,7 +13,7 @@ public class SemaphoreCyclicBarrier implements CyclicBarrier {
         // TODO Add any other initialization statements
     }
 
-    /*
+    /* 
      * An active CyclicBarrier waits until all parties have invoked
      * await on this CyclicBarrier. If the current thread is not
      * the last to arrive then it is disabled for thread scheduling
