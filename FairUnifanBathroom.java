@@ -25,7 +25,6 @@ public class FairUnifanBathroom {
 		numInBathroom +=1;
 		currentTicket +=1;
 		UTInBathroom = true;
-		System.out.println("UT entering bathroom Ticket: " + ticket);
 		notifyAll();
 	}
 	
@@ -40,7 +39,6 @@ public class FairUnifanBathroom {
 		numInBathroom +=1;
 		currentTicket +=1;
 		OUInBathroom = true;
-		System.out.println("OU entering bathroom Ticket: " + ticket);
 		notifyAll();
 	}
 	
@@ -50,7 +48,6 @@ public class FairUnifanBathroom {
 		if(numInBathroom ==0) {
 			UTInBathroom = false;
 		}
-		System.out.println("UT Leaving bathroom");
 		notifyAll();
 	}
 
@@ -60,7 +57,6 @@ public class FairUnifanBathroom {
 		if(numInBathroom ==0) {
 			OUInBathroom = false;
 		}
-		System.out.println("OU Leaving bathroom");
 		notifyAll();
 	}
 }
